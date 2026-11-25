@@ -129,24 +129,56 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Student Feedback')),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 760),
             child: ListView(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
               children: [
-                Text(
-                  'Teacher Evaluation',
-                  style: Theme.of(context).textTheme.headlineSmall
-                      ?.copyWith(fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Share your anonymous feedback',
-                  style: Theme.of(context).textTheme.bodyMedium
-                      ?.copyWith(color: colorScheme.onSurfaceVariant),
+                Container(
+                  key: const Key('feedback-header'),
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primary,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: colorScheme.tertiaryContainer,
+                        foregroundColor: colorScheme.onTertiaryContainer,
+                        child: const Icon(Icons.rate_review_outlined),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'STUDENT FEEDBACK',
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(
+                                    color: colorScheme.onPrimary,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.8,
+                                  ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'Share your thoughts anonymously',
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    color: colorScheme.onPrimary.withValues(
+                                      alpha: 0.9,
+                                    ),
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 20),
                 StreamBuilder<List<RatingRecord>>(
@@ -181,23 +213,26 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 const SizedBox(height: 16),
                 Card(
+                  color: colorScheme.tertiaryContainer,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Evaluate a teacher',
+                          'Your evaluation',
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(height: 12),
                         DropdownButtonFormField<Evaluation>(
                           initialValue: _selected,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: 'Teacher',
-                            border: OutlineInputBorder(),
-                            prefixIcon: Icon(Icons.person_outline),
+                            border: const OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.person_outline),
+                            filled: true,
+                            fillColor: colorScheme.tertiaryContainer,
                           ),
                           items: widget.evaluations
                               .map(
@@ -250,12 +285,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           maxLines: 6,
                           maxLength: 500,
                           textInputAction: TextInputAction.done,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: 'Comments',
                             hintText: 'What went well? What could improve?',
                             alignLabelWithHint: true,
-                            border: OutlineInputBorder(),
-                            prefixIcon: Padding(
+                            border: const OutlineInputBorder(),
+                            filled: true,
+                            fillColor: colorScheme.tertiaryContainer,
+                            prefixIcon: const Padding(
                               padding: EdgeInsets.only(bottom: 56),
                               child: Icon(Icons.chat_bubble_outline),
                             ),
@@ -288,6 +325,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           child: FilledButton.icon(
                             key: const Key('submit-feedback'),
                             onPressed: _isSubmitting ? null : _submit,
+                            style: FilledButton.styleFrom(
+                              backgroundColor: colorScheme.tertiaryContainer,
+                              foregroundColor: colorScheme.onTertiaryContainer,
+                            ),
                             icon: _isSubmitting
                                 ? const SizedBox(
                                     width: 18,
@@ -340,6 +381,7 @@ class _MyFeedbackSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.tertiaryContainer,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

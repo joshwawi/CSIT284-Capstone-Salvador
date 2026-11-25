@@ -14,7 +14,7 @@ class AverageRatingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Card(
-      color: colorScheme.primaryContainer,
+      color: colorScheme.tertiaryContainer,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
@@ -26,7 +26,7 @@ class AverageRatingCard extends StatelessWidget {
                   Text(
                     'Average Rating',
                     style: Theme.of(context).textTheme.titleMedium
-                        ?.copyWith(color: colorScheme.onPrimaryContainer),
+                        ?.copyWith(color: colorScheme.onTertiaryContainer),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -37,7 +37,7 @@ class AverageRatingCard extends StatelessWidget {
                         key: const Key('average-rating'),
                         style: Theme.of(context).textTheme.displaySmall
                             ?.copyWith(
-                              color: colorScheme.onPrimaryContainer,
+                              color: colorScheme.onTertiaryContainer,
                               fontWeight: FontWeight.w700,
                             ),
                       ),
@@ -46,7 +46,7 @@ class AverageRatingCard extends StatelessWidget {
                         child: Text(
                           '/ 5',
                           style: TextStyle(
-                            color: colorScheme.onPrimaryContainer,
+                            color: colorScheme.onTertiaryContainer,
                           ),
                         ),
                       ),
@@ -65,7 +65,7 @@ class AverageRatingCard extends StatelessWidget {
                       filled ? Icons.star_rounded : Icons.star_outline_rounded,
                       color: filled
                           ? Colors.amber.shade700
-                          : colorScheme.onPrimaryContainer.withValues(
+                          : colorScheme.onTertiaryContainer.withValues(
                               alpha: 0.45,
                             ),
                       size: 22,
@@ -76,7 +76,7 @@ class AverageRatingCard extends StatelessWidget {
                 Text(
                   '$responseCount responses',
                   key: const Key('response-count'),
-                  style: TextStyle(color: colorScheme.onPrimaryContainer),
+                  style: TextStyle(color: colorScheme.onTertiaryContainer),
                 ),
               ],
             ),

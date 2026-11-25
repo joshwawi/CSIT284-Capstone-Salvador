@@ -17,11 +17,34 @@ void main() {
     await tester.pumpWidget(StudentFeedbackApp(repository: repository));
     await tester.pumpAndSettle();
 
-    expect(find.text('Student Feedback'), findsOneWidget);
-    expect(find.text('Teacher Evaluation'), findsOneWidget);
+    expect(find.text('STUDENT FEEDBACK'), findsOneWidget);
+    expect(find.text('Your evaluation'), findsOneWidget);
     expect(find.text('Dr. Ana Reyes'), findsOneWidget);
     expect(find.text('4.6'), findsOneWidget);
     expect(find.text('10 responses'), findsOneWidget);
+
+    final theme = Theme.of(
+      tester.element(find.byKey(const Key('feedback-header'))),
+    );
+    expect(theme.scaffoldBackgroundColor, const Color(0xFF87CEEB));
+    expect(theme.colorScheme.surface, const Color(0xFF87CEEB));
+    expect(theme.colorScheme.primaryContainer, const Color(0xFF87CEEB));
+    expect(theme.colorScheme.tertiaryContainer, Colors.white);
+    expect(theme.colorScheme.onSurface, const Color(0xFF17324D));
+    expect(theme.cardTheme.color, const Color(0xFF87CEEB));
+    expect(theme.navigationBarTheme.backgroundColor, const Color(0xFF87CEEB));
+
+    final header = tester.widget<Container>(
+      find.byKey(const Key('feedback-header')),
+    );
+    expect(
+      header.decoration,
+      isA<BoxDecoration>().having(
+        (decoration) => decoration.color,
+        'background color',
+        const Color(0xFF28688F),
+      ),
+    );
   });
 
   testWidgets('requires a star rating before submitting feedback', (

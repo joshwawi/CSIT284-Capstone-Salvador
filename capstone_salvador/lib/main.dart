@@ -88,9 +88,50 @@ class StudentFeedbackApp extends StatelessWidget {
 }
 
 ThemeData _appTheme() {
+  const skyBlue = Color(0xFF87CEEB);
+  const panelWhite = Colors.white;
+  const ink = Color(0xFF17324D);
+  final colorScheme =
+      ColorScheme.fromSeed(
+        seedColor: const Color(0xFF3E89B5),
+        brightness: Brightness.light,
+      ).copyWith(
+        primary: const Color(0xFF28688F),
+        onPrimary: Colors.white,
+        primaryContainer: skyBlue,
+        onPrimaryContainer: ink,
+        tertiaryContainer: panelWhite,
+        onTertiaryContainer: ink,
+        surface: skyBlue,
+        onSurface: ink,
+        onSurfaceVariant: const Color(0xFF3D5872),
+        surfaceContainerLowest: skyBlue,
+        surfaceContainerLow: skyBlue,
+        surfaceContainer: skyBlue,
+        surfaceContainerHigh: skyBlue,
+        surfaceContainerHighest: skyBlue,
+      );
+
   return ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2F6B65)),
+    colorScheme: colorScheme,
+    scaffoldBackgroundColor: skyBlue,
+    textTheme: Typography.material2021().black.apply(
+      bodyColor: ink,
+      displayColor: ink,
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: skyBlue,
+      foregroundColor: ink,
+    ),
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: skyBlue,
+      indicatorColor: Color(0xFF6FB7D8),
+    ),
+    cardTheme: const CardThemeData(
+      color: skyBlue,
+      surfaceTintColor: Colors.transparent,
+    ),
   );
 }
 
